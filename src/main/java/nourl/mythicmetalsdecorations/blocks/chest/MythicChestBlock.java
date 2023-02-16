@@ -24,6 +24,7 @@ import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
@@ -31,7 +32,6 @@ import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -39,6 +39,7 @@ import net.minecraft.world.WorldAccess;
 import nourl.mythicmetalsdecorations.MythicChestScreenHandler;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Random;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -64,7 +65,8 @@ public class MythicChestBlock extends AbstractChestBlock<MythicChestBlockEntity>
         public MythicChest getFromBoth(MythicChestBlockEntity first, MythicChestBlockEntity second) {
             var name = first.hasCustomName()
                     ? first.getCustomName()
-                    : second.hasCustomName() ? second.getCustomName() : Text.translatable("text.mythicmetals_decorations.large_chest", second.getCachedState().getBlock().getName());
+                    : second.hasCustomName() ? second.getCustomName() : new TranslatableText("text.mythicmetals_decorations" +
+                    ".large_chest", second.getCachedState().getBlock().getName());
 
             return new MythicChest(
                     new DoubleInventory(first, second),
@@ -159,6 +161,7 @@ public class MythicChestBlock extends AbstractChestBlock<MythicChestBlockEntity>
         if (state.get(CHEST_TYPE) == ChestType.SINGLE) {
             return SINGLE_SHAPE;
         } else {
+            //noinspection EnhancedSwitchMigration
             switch (getFacing(state)) {
                 case NORTH:
                 default:
@@ -329,7 +332,7 @@ public class MythicChestBlock extends AbstractChestBlock<MythicChestBlockEntity>
         }
     }
 
-    public static DoubleBlockProperties.PropertyRetriever<ChestBlockEntity, Float2FloatFunction> getAnimationProgressRetriever(final LidOpenable progress) {
+    public static DoubleBlockProperties.PropertyRetriever<ChestBlockEntity, Float2FloatFunction> getAnimationProgressRetriever(final MythicChestBlockEntity progress) {
         return new DoubleBlockProperties.PropertyRetriever<>() {
             public Float2FloatFunction getFromBoth(ChestBlockEntity chestBlockEntity, ChestBlockEntity chestBlockEntity2) {
                 return tickDelta -> Math.max(chestBlockEntity.getAnimationProgress(tickDelta), chestBlockEntity2.getAnimationProgress(tickDelta));
@@ -352,7 +355,7 @@ public class MythicChestBlock extends AbstractChestBlock<MythicChestBlockEntity>
     }
 
     public Text getChestTooltip() {
-        return Text.translatable("tooltip.mythicmetals_decorations.chest_size", this.getSize()).formatted(Formatting.GRAY);
+        return new TranslatableText("tooltip.mythicmetals_decorations.chest_size", this.getSize()).formatted(Formatting.GRAY);
     }
 
     private record MythicChest(Inventory inventory, Text name, Predicate<PlayerEntity> canOpen,

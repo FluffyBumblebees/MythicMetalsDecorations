@@ -1,8 +1,6 @@
 package nourl.mythicmetalsdecorations.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import io.wispforest.owo.mixin.ui.SlotAccessor;
-import io.wispforest.owo.util.pond.OwoSlotExtension;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
@@ -11,6 +9,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import nourl.mythicmetalsdecorations.MythicChestScreenHandler;
+import nourl.mythicmetalsdecorations.backport.mixin.SlotAccessor;
+import nourl.mythicmetalsdecorations.backport.mixin.SlotExtension;
 import nourl.mythicmetalsdecorations.utils.ChestScreenSize;
 import nourl.mythicmetalsdecorations.utils.RegHelper;
 
@@ -108,9 +108,8 @@ public class MythicChestScreen extends HandledScreen<MythicChestScreenHandler> {
     }
 
     // I am not scared of the ducks in the pond
-    @SuppressWarnings("UnstableApiUsage")
     private void toggleSlot(Slot slot, boolean enabled) {
-        ((OwoSlotExtension) slot).owo$setDisabledOverride(!enabled);
+        ((SlotExtension) slot).owo$setDisabledOverride(!enabled);
     }
 
     @Override

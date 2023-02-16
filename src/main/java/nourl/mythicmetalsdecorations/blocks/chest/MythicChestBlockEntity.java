@@ -4,7 +4,6 @@ import io.wispforest.owo.util.ImplementedInventory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.block.entity.ChestLidAnimator;
-import net.minecraft.block.entity.LidOpenable;
 import net.minecraft.block.entity.ViewerCountManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.ContainerLock;
@@ -22,7 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import nourl.mythicmetalsdecorations.MythicChestScreenHandler;
 // TODO - Do we need implemented inventory here?
-public class MythicChestBlockEntity extends ChestBlockEntity implements ImplementedInventory, LidOpenable {
+public class MythicChestBlockEntity extends ChestBlockEntity implements ImplementedInventory {
     private final int size;
     private final String name;
 
@@ -87,7 +86,7 @@ public class MythicChestBlockEntity extends ChestBlockEntity implements Implemen
         return name;
     }
 
-    public static void clientTick(World world, BlockPos pos, BlockState state, MythicChestBlockEntity blockEntity) {
+    public static void clientTick(World ignoredWorld, BlockPos ignoredPos, BlockState ignoredState, MythicChestBlockEntity blockEntity) {
         blockEntity.lidAnimator.step();
     }
 
@@ -165,7 +164,7 @@ public class MythicChestBlockEntity extends ChestBlockEntity implements Implemen
 
     }
 
-    static void playSound(World world, BlockPos pos, BlockState state, SoundEvent soundEvent) {
+    static void playSound(World world, BlockPos pos, BlockState ignoredState, SoundEvent soundEvent) {
         double x = pos.getX() + .5d;
         double y = pos.getY() + .5d;
         double z = pos.getZ() + .5d;

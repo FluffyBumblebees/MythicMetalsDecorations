@@ -12,7 +12,7 @@ import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.item.BlockItem;
-import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import nourl.mythicmetals.MythicMetals;
 import nourl.mythicmetalsdecorations.MythicMetalsDecorations;
@@ -104,10 +104,11 @@ public class MythicMetalsDecorationsClient implements ClientModInitializer {
                 }
 
                 if (stack.getItem().equals(MythicMetalsDecorations.CROWN_CHISEL)) {
-                    lines.add(1, Text.translatable("item.mythicmetals_decorations.crown_chisel.tooltip").formatted(Formatting.GRAY));
-                    lines.add(2, Text.translatable("item.mythicmetals_decorations.crown_chisel.tooltip2").formatted(Formatting.GRAY).formatted(Formatting.UNDERLINE));
-                    if (!MythicMetals.CONFIG.enableNuggets()) {
-                        lines.add(3, Text.translatable("item.mythicmetals_decorations.crown_chisel.disabled").formatted(Formatting.GRAY));
+                    lines.add(1,
+                            new TranslatableText("item.mythicmetals_decorations.crown_chisel.tooltip").formatted(Formatting.GRAY));
+                    lines.add(2,  new TranslatableText("item.mythicmetals_decorations.crown_chisel.tooltip2").formatted(Formatting.GRAY).formatted(Formatting.UNDERLINE));
+                    if (!MythicMetals.CONFIG.enableNuggets) {
+                        lines.add(3, new TranslatableText("item.mythicmetals_decorations.crown_chisel.disabled").formatted(Formatting.GRAY));
                     }
                 }
             }

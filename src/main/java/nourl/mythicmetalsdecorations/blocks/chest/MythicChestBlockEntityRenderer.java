@@ -48,7 +48,7 @@ public class MythicChestBlockEntityRenderer implements BlockEntityRenderer<Mythi
     private final ModelPart doubleChestRightLatch;
     private static final Dilation D = new Dilation(0.01F);
 
-    public MythicChestBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
+    public MythicChestBlockEntityRenderer(BlockEntityRendererFactory.Context ignoredCtx) {
         // Actually use my own rendering
         ModelPart modelSingle = getSingleTexturedModelData().createModel();
         this.singleChestBase = modelSingle.getChild(BASE);

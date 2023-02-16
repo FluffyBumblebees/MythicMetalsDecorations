@@ -61,7 +61,7 @@ public class DecorationSet {
         if (chain != null)
             RegHelper.chain(name + "_chain", chain, fireproof);
         if (chest != null) {
-            RegHelper.chest(name + "_chest", chest, MythicMetalsDecorations.MYTHICMETALS_DECOR, fireproof);
+            RegHelper.chest(name + "_chest", chest, fireproof, MythicMetalsDecorations.MYTHICMETALS_DECOR);
             CHEST_MAP.put(name, chest);
         }
 
